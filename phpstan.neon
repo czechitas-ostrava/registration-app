@@ -1,0 +1,27 @@
+includes:
+	- ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+	# tmpDir: '.phpstan_cache'
+
+	paths:
+		- app
+		- config
+		- database/migrations
+		- routes
+
+	excludePaths:
+		- app/Modules/Parsedown
+
+	# The level 8 is the highest level
+	level: 6
+	reportUnmatchedIgnoredErrors: true
+
+	ignoreErrors:
+		- '#isRole(Master|Admin|Parent|Or)*\(\)#' # Is magic method
+		-
+			message: '#CzechitasApp\\Models\\[a-z]+::\$[a-z_]+_count#i' # Is added in Controllers by RelationCountColumn
+			paths:
+				- app/Policies/CategoryPolicy.php
+				- app/Policies/TermPolicy.php
