@@ -19,6 +19,7 @@ parameters:
 	reportUnmatchedIgnoredErrors: true
 
 	ignoreErrors:
+		- '#Access to an undefined property CzechitasApp\\Models\\Category::\$imagePath#'
 		- '#isRole(Master|Admin|Parent|Or)*\(\)#' # Is magic method
 		-
 			message: '#CzechitasApp\\Models\\[a-z]+::\$[a-z_]+_count#i' # Is added in Controllers by RelationCountColumn

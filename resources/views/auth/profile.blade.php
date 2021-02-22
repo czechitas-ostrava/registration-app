@@ -67,6 +67,22 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr>
+
+                    <div class="form-group row">
+                        <label for="access-token" class="col-md-4 col-form-label text-md-right">Access token</label>
+
+                        <div class="col-md-5">
+                            <input id="access-token" type="text" class="form-control" readonly onClick="this.setSelectionRange(0, this.value.length)" value="{{ $access_token }}">
+                        </div>
+                        <div class="col-md-2">
+                            <form action="{{ route('profile.access_token') }}" method="POST">
+                                @csrf
+                                <button class="btn btn-danger">Přegenerovat</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

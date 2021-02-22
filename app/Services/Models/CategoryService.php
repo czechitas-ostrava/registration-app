@@ -75,6 +75,19 @@ class CategoryService extends ModelBaseService
             ]);
     }
 
+    public function getAllList(): Builder
+    {
+        return $this->getQuery()
+            ->whereNull('parent_id')
+            ->orderBy('position')
+            ->with([
+                'children' => static function (Relation $q): void {
+                    /** @var Builder<Category> $q */
+                    $q->orderBy('position');
+                },
+            ]);
+    }
+
     /**
      * Get list query for categories of with parent ID
      */

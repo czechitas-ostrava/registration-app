@@ -17,12 +17,26 @@ class ProfileController extends Controller
     {
         return \view('auth.profile', [
             'name' => Auth::user()->name,
+            'access_token' => Auth::user()->access_token,
         ]);
     }
 
     public function update(UpdateProfileRequest $request): RedirectResponse
     {
         Auth::user()->update($request->getData());
+
+        Alert::success(\trans('auth.profile.success'))->flash();
+
+        return \back();
+    }
+
+    public function regenerateAccessToken(): RedirectResponse
+    {
+        $user = Auth::user();
+        $user->tokens()->delete();
+
+        $user->access_token = $user->createToken('api')->plainTextToken;
+        $user->save();
 
         Alert::success(\trans('auth.profile.success'))->flash();
 

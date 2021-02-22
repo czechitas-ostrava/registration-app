@@ -1,5 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+use CzechitasApp\Http\Middleware\EncryptCookies;
+use CzechitasApp\Http\Middleware\VerifyCsrfToken;
+
 return [
 
     /*
@@ -13,10 +18,12 @@ return [
     |
     */
 
-    'stateful' => explode(',', env(
-        'SANCTUM_STATEFUL_DOMAINS',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1'
-    )),
+    'stateful' => [],
+
+    // 'stateful' => explode(',', env(
+    //     'SANCTUM_STATEFUL_DOMAINS',
+    //     'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1'
+    // )),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,8 +50,8 @@ return [
     */
 
     'middleware' => [
-        'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
-        'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
+        'verify_csrf_token' => VerifyCsrfToken::class,
+        'encrypt_cookies' => EncryptCookies::class,
     ],
 
 ];

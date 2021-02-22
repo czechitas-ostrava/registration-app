@@ -19,7 +19,6 @@ class CreateCategoriesTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('name');
             $table->string('slug', 30)->unique();
-            $table->boolean('contains_school')->default(0);
             $table->text('content')->nullable();
             $table->unsignedTinyInteger('position');
 

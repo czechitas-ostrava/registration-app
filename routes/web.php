@@ -70,6 +70,7 @@ Route::resource('objednavka', OrderController::class)->only(['create', 'store'])
 
 Route::middleware(['auth'])->group(static function (): void {
     // Profile
+    Route::post('profil/access-token', [ProfileController::class, 'regenerateAccessToken'])->name('profile.access_token');
     Route::get('profil', [ProfileController::class, 'profileForm'])->name('profile');
     Route::post('profil', [ProfileController::class, 'update']);
 

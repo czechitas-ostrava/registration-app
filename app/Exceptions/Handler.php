@@ -48,6 +48,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, \Throwable $exception)
     {
+        if ($request->is('api/*')) {
+            $request->server->set('HTTP_ACCEPT', 'application/json');
+            $request->headers->set('Accept', 'application/json');
+        }
+
         return parent::render($request, $exception);
     }
 }

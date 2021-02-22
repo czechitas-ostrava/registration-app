@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property int     $id
@@ -29,6 +30,7 @@ use Illuminate\Support\Str;
  * @property string  $password
  * @property bool    $is_blocked
  * @property string  $role
+ * @property string  $access_token
  * @property Carbon  $created_at
  * @property Carbon  $updated_at
  *
@@ -38,7 +40,7 @@ use Illuminate\Support\Str;
  */
 class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
-    use Notifiable, Authenticatable, Authorizable, CanResetPassword;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -52,7 +54,7 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
      *
      * @var array<string>
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'access_token'];
 
     /**
      * The attributes that should be mutated to dates.
