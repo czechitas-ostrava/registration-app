@@ -21,11 +21,27 @@ class TermPolicy
     }
 
     /**
+     * Determine whether the user can view the list of terms.
+     */
+    public function listParent(User $user): bool
+    {
+        return $user->isRoleParent();
+    }
+
+    /**
      * Determine whether the user can view the term.
      */
     public function view(User $user, Term $term): bool
     {
         return $user->isAdminOrMore();
+    }
+
+    /**
+     * Determine whether the user can view the term.
+     */
+    public function viewParent(User $user, Term $term): bool
+    {
+        return $user->isRoleParent() && $term->isPossibleLogin();
     }
 
     /**

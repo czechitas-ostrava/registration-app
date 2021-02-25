@@ -31,7 +31,7 @@ class OrderPolicy
     /**
      * Determine whether the user can create orders.
      */
-    public function create(User $user): bool
+    public function create(?User $user): bool
     {
         return true;
     }

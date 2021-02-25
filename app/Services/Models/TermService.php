@@ -76,6 +76,9 @@ class TermService extends ModelBaseService
         return $this->getQuery()->with(['category:id,name']);
     }
 
+    /**
+     * @return Builder<Term>
+     */
     public function getApiList(int $page, int $perPage): Builder
     {
         $perPage = \min(\max($perPage, 0), 100);

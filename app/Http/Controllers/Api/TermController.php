@@ -10,6 +10,7 @@ use CzechitasApp\Http\Requests\Api\Term\UpdateTermRequest;
 use CzechitasApp\Models\Term;
 use CzechitasApp\Services\Models\TermService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class TermController extends Controller
@@ -24,19 +25,34 @@ class TermController extends Controller
 
     public function index(Request $request): Response
     {
-        $this->authorize('list', Term::class);
+        if (Auth::user()->can('list', Term::class)) {
+            return \response()->json($this->termService->getApiList(
+                (int)$request->query('page', '1'),
+                (int)$request->query('perPage', '50')
+            )->get(['id', 'category_id', 'start', 'end', 'opening', 'price']));
+        }
 
-        return \response()->json($this->termService->getApiList(
-            (int)$request->query('page', '1'),
-            (int)$request->query('perPage', '50')
-        )->get(['id', 'category_id', 'start', 'end', 'opening', 'price']));
+        if (Auth::user()->can('listParent', Term::class)) {
+            return \response()->json($this->termService->getApiList(
+                (int)$request->query('page', '1'),
+                (int)$request->query('perPage', '50')
+            )->possibleLogin()->get(['id', 'category_id', 'start', 'end', 'price']));
+        }
+
+        \abort(403);
     }
 
     public function show(Term $term): Response
     {
-        $this->authorize('view', $term);
+        if (Auth::user()->can('view', $term)) {
+            return \response()->json($term);
+        }
 
-        return \response()->json($term);
+        if (Auth::user()->can('viewParent', $term)) {
+            return \response()->json($term->only(['id', 'category_id', 'start', 'end', 'price', 'note_public']));
+        }
+
+        \abort(403);
     }
 
     public function store(CreateTermRequest $request): Response
@@ -52,7 +68,7 @@ class TermController extends Controller
         $this->authorize('update', $term);
         $this->termService->setContext($term)->update($request->getData());
 
-        return \response()->json($this->termService->getContext(), Response::HTTP_ACCEPTED);
+        return \response()->json($this->termService->getContext(), Response::HTTP_OK);
     }
 
     public function destroy(Term $term): Response

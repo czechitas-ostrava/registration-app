@@ -25,6 +25,6 @@ class OrderController extends Controller
         $this->authorize('create', Order::class);
         $order = $this->orderService->insert($request->getData());
 
-        return \response()->json($order, Response::HTTP_OK);
+        return \response()->json($order, Response::HTTP_CREATED);
     }
 }
