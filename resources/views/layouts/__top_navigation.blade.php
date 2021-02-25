@@ -30,6 +30,17 @@
                     </div>
                 </div>
             @endif
+            @if (Auth::user() == null)
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle{{ Route::is(['static.teachers', 'orders.create']) ? ' active' : null }}" href="{{ route('static.teachers') }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @lang('app.menu.teachers')
+                    </a>
+                    <div class="dropdown-menu submenu">
+                        <a class="dropdown-item {{ Route::is('static.teachers') ? 'active' : null }}" href="{{ route('static.teachers') }}">@lang('app.menu.teachers_tuts')</a>
+                        <a class="dropdown-item {{ Route::is('orders.create') ? 'active' : null }}" href="{{ route('orders.create') }}">@lang('app.menu.teachers_order')</a>
+                    </div>
+                </div>
+            @endif
             <a class="nav-item nav-link {{ Route::is('static.contact') ? 'active' : null }}" href="{{ route('static.contact') }}">
                 @lang('app.menu.contact')
             </a>
