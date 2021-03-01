@@ -22,7 +22,6 @@
 </head>
 
 <body class="section--{{ getResourceNameFromRoute(Route::currentRouteName()) }}">
-    @dump($_SERVER, Request::getScheme())
     @if (app()->isDownForMaintenance())
         <div class="alert alert-danger mb-0 p-2 text-center" role="alert">
           Application is DOWN!!!
