@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e79f10fca2827edbbc5b80137cfcaae6",
+    "content-hash": "34939f5df3f397c0cded7cc500dfadd9",
     "packages": [
         {
             "name": "arxeiss/passwordrule",
@@ -9929,7 +9929,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3.0"
+        "php": "^7.3.0",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

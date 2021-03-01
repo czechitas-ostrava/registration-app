@@ -21,7 +21,9 @@
         "prologue/alerts": "0.4.8",
         "queueworker/sansdaemon": "1.2.3",
         "resampler/resampler": "^1.0",
-        "tamtamchik/namecase": "2.2.0"
+        "tamtamchik/namecase": "2.2.0",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
     },
     "require-dev": {
         "arxeiss/coding-standards": "^0.7.0",
