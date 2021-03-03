@@ -29,7 +29,7 @@
     @endif
     <!--
     @php
-       // print_r(getenv());
+       print_r(getenv());
     @endphp
     -->
     <div class="main_wrap">
