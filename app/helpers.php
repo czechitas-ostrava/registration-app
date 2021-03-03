@@ -405,3 +405,33 @@ function formatNameCase(?string $name): ?string
 
     return resolve(FormatNameService::class)->formatCase($name);
 }
+
+function dbTablePrefix(): string
+{
+    $serverName = env('SERVER_NAME');
+    if (env('DISABLE_PREFIXES', false) == true || $serverName == '') {
+        return '';
+    }
+    $prefix = str_replace(['czechitas', 'app'], '', Str::before($serverName, '.'));
+    $prefix = Str::slug($prefix);
+    if ($prefix == '') {
+        return '';
+    }
+
+    return "{$prefix}_";
+}
+
+function baseFolderName(): string
+{
+    $serverName = env('SERVER_NAME');
+    if (env('DISABLE_SUBFOLDERS', false) == true || $serverName == '') {
+        return '';
+    }
+    $prefix = str_replace(['czechitas', 'app'], '', Str::before($serverName, '.'));
+    $prefix = Str::slug($prefix);
+    if ($prefix == '') {
+        return '';
+    }
+
+    return "{$prefix}/";
+}

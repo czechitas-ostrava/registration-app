@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack --mode=development --watch",
     "debug": "cross-env NODE_ENV=development webpack --mode=development",
-    "build": "cross-env NODE_ENV=production webpack --mode=production"
+    "build": "cross-env NODE_ENV=production webpack --mode=production",
+    "heroku-postbuild": "npm run build"
   },
   "devDependencies": {
     "autoprefixer": "9.8.6",
