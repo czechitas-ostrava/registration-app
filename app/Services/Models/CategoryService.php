@@ -10,6 +10,7 @@ use CzechitasApp\Services\UploadStorageService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Resampler\Resampler;
 
 /**
@@ -120,7 +121,7 @@ class CategoryService extends ModelBaseService
      */
     public function getImagePath(bool $addFileName = true, bool $absolute = false): string
     {
-        $relativePath = self::IMAGE_DIRECTORY;
+        $relativePath = \sprintf('%s%s', \baseFolderName(), self::IMAGE_DIRECTORY);
         if ($addFileName) {
             $relativePath .= '/' . $this->getContext()->slug . self::IMAGE_SUFFIX;
         }
@@ -219,15 +220,14 @@ class CategoryService extends ModelBaseService
      */
     public function saveImage(UploadedFile $imageFile): void
     {
-        $currentPath = UploadStorageService::storeUploadedFile($imageFile, $this->getImagePath(false));
-        $fullPath = UploadStorageService::path($currentPath);
-
-        $finalPath = UploadStorageService::path($this->getImagePath());
+        $tmpDisk = Storage::disk('local');
+        $currentPath = $imageFile->store($this->getImagePath(false), 'local');
+        $fullPath = $tmpDisk->path($currentPath);
         Resampler::load($fullPath)
             ->crop(600, 335)
-            ->save($finalPath);
-
-        UploadStorageService::delete($currentPath);
+            ->save();
+        UploadStorageService::writeStream($this->getImagePath(), $tmpDisk->readStream($currentPath));
+        $tmpDisk->delete($currentPath);
     }
 
     /**

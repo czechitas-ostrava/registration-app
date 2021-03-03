@@ -405,3 +405,38 @@ function formatNameCase(?string $name): ?string
 
     return resolve(FormatNameService::class)->formatCase($name);
 }
+
+function getServerName(): string
+{
+    return env('OVERRIDE_APP_NAME', env('HEROKU_APP_NAME', ''));
+}
+
+function dbTablePrefix(): string
+{
+    $serverName = getServerName();
+    if (env('DISABLE_PREFIXES', false) == true || $serverName == '') {
+        return '';
+    }
+    $prefix = str_replace(['czechitas', 'app'], '', Str::before($serverName, '.'));
+    $prefix = Str::slug($prefix);
+    if ($prefix == '') {
+        return '';
+    }
+
+    return "{$prefix}_";
+}
+
+function baseFolderName(): string
+{
+    $serverName = getServerName();
+    if (env('DISABLE_SUBFOLDERS', false) == true || $serverName == '') {
+        return '';
+    }
+    $prefix = str_replace(['czechitas', 'app'], '', Str::before($serverName, '.'));
+    $prefix = Str::slug($prefix);
+    if ($prefix == '') {
+        return '';
+    }
+
+    return "{$prefix}/";
+}

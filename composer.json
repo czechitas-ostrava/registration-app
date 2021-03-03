@@ -16,6 +16,7 @@
         "laravel/framework": "8.26.1",
         "laravel/sanctum": "^2.9",
         "laravel/ui": "3.2.0",
+        "league/flysystem-aws-s3-v3": "~1.0",
         "mpdf/mpdf": "8.0.10",
         "phpoffice/phpspreadsheet": "1.16.0",
         "prologue/alerts": "0.4.8",
@@ -70,8 +71,8 @@
             "php artisan package:discover"
         ],
         "post-install-cmd": [
-            "php artisan migrate --force",
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "php artisan migrate --force"
         ]
     },
     "config": {

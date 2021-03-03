@@ -37,6 +37,20 @@ class UploadStorageService
 {
     public const DISK_NAME = 'uploads';
 
+    protected static function getDisk(): string
+    {
+        static $disk = null;
+        if ($disk === null) {
+            $disk = \config('filesystems.default');
+        }
+
+        if ($disk === 'local') {
+            return self::DISK_NAME;
+        }
+
+        return $disk;
+    }
+
     /**
      * Store uploaded file in public uploads disk
      *
@@ -45,10 +59,10 @@ class UploadStorageService
     public static function storeUploadedFile(UploadedFile $file, string $path, ?string $name = null)
     {
         if (empty($name)) {
-            return $file->store($path, self::DISK_NAME);
+            return $file->store($path, self::getDisk());
         }
 
-        return $file->storeAs($path, $name, self::DISK_NAME);
+        return $file->storeAs($path, $name, self::getDisk());
     }
 
     /**
@@ -57,7 +71,7 @@ class UploadStorageService
      */
     public static function __callStatic(string $method, array $arguments)
     {
-        $disk = Storage::disk(self::DISK_NAME);
+        $disk = Storage::disk(self::getDisk());
 
         return \call_user_func_array([$disk, $method], $arguments);
     }

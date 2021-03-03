@@ -52,7 +52,8 @@ class SendEmailService extends ModelBaseService
     protected function generatePath(Student $student): string
     {
         return \sprintf(
-            '%s/%s/%06d-%s-%s.html',
+            '%s%s/%s/%06d-%s-%s.html',
+            \baseFolderName(),
             self::MAIL_STORAGE_DIRECTORY,
             Carbon::now()->format('Y-m'),
             $student->id,
