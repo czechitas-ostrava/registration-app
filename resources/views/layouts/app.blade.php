@@ -27,6 +27,11 @@
           Application is DOWN!!!
         </div>
     @endif
+    <!--
+    @php
+       print_r(getenv());
+    @endphp
+    -->
     <div class="main_wrap">
         <header class="header">
             @include('layouts.__top_navigation')
