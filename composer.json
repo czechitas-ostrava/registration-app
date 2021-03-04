@@ -73,7 +73,10 @@
         ],
         "post-install-cmd": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "php artisan deploy"
+            "php artisan migrate --force"
+        ],
+        "warmup": [
+            "php artisan warmup"
         ]
     },
     "config": {

@@ -7,14 +7,14 @@ namespace CzechitasApp\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 
-class Deploy extends Command
+class WarmUp extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'deploy';
+    protected $signature = 'warmup';
 
     /**
      * The console command description.
@@ -33,11 +33,10 @@ class Deploy extends Command
         $this->call('clear-compiled');
         if (!App::isLocal()) {
             $this->call('view:cache');
-            // $this->call('config:cache');
+            $this->call('config:cache');
             $this->call('event:cache');
             $this->call('route:cache');
         }
-        $this->call('migrate', ['--force' => true]);
 
         return 0;
     }
