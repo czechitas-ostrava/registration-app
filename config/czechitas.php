@@ -32,4 +32,7 @@ return [
     ],
 
     'admin_mail' => 'akademie@czechitas-app.cz',
+
+    // Never delete DB tables with given prefixes during PR pre-destroy scripts
+    'keep_prefixes' => [''],
 ];
