@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CzechitasApp\Console\Commands;
 
 use Illuminate\Console\Command;
 
 class DestroyEnvironment extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -24,14 +25,15 @@ class DestroyEnvironment extends Command
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return mixed
      */
     public function handle()
     {
-        $direct = in_array(dbTablePrefix(), config('czechitas.keep_prefixes'));
-        $trimmed = in_array(trim(dbTablePrefix(), ' _-'), config('czechitas.keep_prefixes'));
-        if($direct || $trimmed){
-            printf("Prefix '%s' should be ignored, nothing is happening\n", dbTablePrefix());
+        $direct = \in_array(\dbTablePrefix(), \config('czechitas.keep_prefixes'));
+        $trimmed = \in_array(\trim(\dbTablePrefix(), ' _-'), \config('czechitas.keep_prefixes'));
+        if ($direct || $trimmed) {
+            \printf("Prefix '%s' should be ignored, nothing is happening\n", \dbTablePrefix());
+
             return 0;
         }
 
@@ -39,12 +41,14 @@ class DestroyEnvironment extends Command
 
         $this->call('migrate:reset', ['--force' => true]);
 
-        $migrator = resolve('migrator');
+        $migrator = \resolve('migrator');
 
-        if($migrator->repositoryExists()){
+        if ($migrator->repositoryExists()) {
             $migrator->deleteRepository();
         }
 
-        $this->info(sprintf("All tables %s* are gone. Good bye", dbTablePrefix()));
+        $this->info(\sprintf('All tables %s* are gone. Good bye', \dbTablePrefix()));
+
+        return 0;
     }
 }

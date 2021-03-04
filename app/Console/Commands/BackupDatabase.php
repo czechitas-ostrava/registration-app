@@ -27,7 +27,7 @@ class BackupDatabase extends Command
 
     private function getFolder(): string
     {
-        return baseFolderName()."db-backup/";
+        return \baseFolderName() . 'db-backup/';
     }
 
     /**
@@ -56,14 +56,14 @@ class BackupDatabase extends Command
             $tmpDisk->makeDirectory('tmp');
         }
         $filename = \sprintf('%s.sql', Carbon::now()->format('Y-m-d_H-i-s.u'));
-        $tmpPath = 'tmp/'.$filename;
+        $tmpPath = 'tmp/' . $filename;
         $dump->start($tmpDisk->path($tmpPath));
 
         if (!Storage::exists($this->getFolder())) {
             Storage::makeDirectory($this->getFolder());
         }
 
-        $finalPath = sprintf('%s%s', $this->getFolder(), $filename);
+        $finalPath = \sprintf('%s%s', $this->getFolder(), $filename);
         Storage::writeStream($finalPath, $tmpDisk->readStream($tmpPath));
         $tmpDisk->delete($tmpPath);
 
