@@ -33,7 +33,7 @@ class Deploy extends Command
         $this->call('clear-compiled');
         if (!App::isLocal()) {
             $this->call('view:cache');
-            $this->call('config:cache');
+            // $this->call('config:cache');
             $this->call('event:cache');
             $this->call('route:cache');
         }
