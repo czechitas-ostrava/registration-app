@@ -8,6 +8,6 @@
     }
   ],
   "scripts": {
-    "pr-predestroy": "php artisan migrate:reset --force"
+    "pr-predestroy": "php artisan destroy-env"
   }
 }

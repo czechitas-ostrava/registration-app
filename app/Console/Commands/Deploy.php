@@ -14,8 +14,7 @@ class Deploy extends Command
      *
      * @var string
      */
-    protected $signature = 'deploy
-                            {version? : Current release version in format v1.2.3}';
+    protected $signature = 'deploy';
 
     /**
      * The console command description.
@@ -31,44 +30,15 @@ class Deploy extends Command
      */
     public function handle()
     {
-        $this->call('down');
-
-        if (\preg_match('/^v[0-9]+\.[0-9]+(?:\.[0-9]+)?/', (string)$this->argument('version'), $matches)) {
-            $this->writeVersionToEnv($matches[0]);
-        }
-
         $this->call('clear-compiled');
-        $this->call('view:cache');
-        $this->call('config:cache');
-        $this->call('event:cache');
         if (!App::isLocal()) {
+            $this->call('view:cache');
+            $this->call('config:cache');
+            $this->call('event:cache');
             $this->call('route:cache');
         }
         $this->call('migrate', ['--force' => true]);
 
-        $this->call('up');
-
         return 0;
-    }
-
-    /**
-     * Write current version into .env file
-     */
-    private function writeVersionToEnv(string $version): void
-    {
-        if (empty($version)) {
-            return;
-        }
-
-        $envPath = \base_path('.env');
-        $currentEnv = (string)\file_get_contents($envPath);
-
-        $regex = '/^(SENTRY_RELEASE_VERSION).*$/m';
-        if (\preg_match($regex, $currentEnv)) {
-            $currentEnv = \preg_replace($regex, "\$1={$version}", $currentEnv);
-        } else {
-            $currentEnv .= "\nSENTRY_RELEASE_VERSION={$version}\n";
-        }
-        \file_put_contents($envPath, $currentEnv);
     }
 }
