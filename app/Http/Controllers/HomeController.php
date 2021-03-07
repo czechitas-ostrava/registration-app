@@ -55,4 +55,9 @@ class HomeController extends Controller
     {
         \abort(404);
     }
+
+    public function apiError404(): void
+    {
+        \abort(404, 'undefined API path');
+    }
 }

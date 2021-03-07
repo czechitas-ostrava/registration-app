@@ -81,7 +81,7 @@ class StudentService extends ModelBaseService
             ->where('parent_id', $user->id)
             ->with([
                 'term' => static function (BelongsTo $query): void {
-                    /** @var BelongsTo<Term> $query */
+                    /** @var BelongsTo<Term, Student> $query */
                     $query->withTrashed();
                 },
                 0 => 'term.category:id,name',

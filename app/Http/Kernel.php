@@ -45,6 +45,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            \CzechitasApp\Http\Middleware\ForceJsonResponse::class,
             'throttle:60,1',
             'bindings',
         ],

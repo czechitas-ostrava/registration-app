@@ -6,6 +6,7 @@ use CzechitasApp\Http\Controllers\Api\Auth\ProfileController;
 use CzechitasApp\Http\Controllers\Api\CategoryController;
 use CzechitasApp\Http\Controllers\Api\OrderController;
 use CzechitasApp\Http\Controllers\Api\TermController;
+use CzechitasApp\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::middleware('auth:sanctum')->group(static function (): void {
 
     Route::get('users/current', [ProfileController::class, 'current']);
 });
+
+Route::fallback([HomeController::class, 'apiError404']);
