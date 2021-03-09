@@ -25,8 +25,8 @@ return [
         'minimum_age_term_starts' => 4,
         // Kolik dní před začátkem kurzu lze vytvářet přihlášky nebo upravovat přihlášky
         // 0 znamená první den kurzu, 8 je týden před (kurz začíná v pondělí, pak neděle týden před ještě jde)
-        'login_before_start' => 8,
-        'edit_before_start' => 8,
+        'login_before_start' => 1,
+        'edit_before_start' => 1,
         // Kolik dní před koncem kurzu lze žáka odhlásit
         'logout_before_end' => 0,
     ],
