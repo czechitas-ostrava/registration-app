@@ -52,7 +52,7 @@ return [
         'block_btn'      => 'Zablokovat uživatele',
 
         'constraints'    => [
-            'paymnets' => 'Vložil platbu k žákům',
+            'payments' => 'Vložil platbu k žákům',
             'students' => 'Vytvořil přihlášku',
         ],
     ],
