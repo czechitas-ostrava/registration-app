@@ -75,6 +75,12 @@
     <script src="{{ asset(mix('js/main.js')) }}"></script>
     @yield('scripts')
     <script type="text/javascript">
+        var __debug = {
+            "HEROKU_APP_NAME": @json(env('HEROKU_APP_NAME', '')),
+            "OVERRIDE_APP_NAME": @json(env('OVERRIDE_APP_NAME', '')),
+            "table_prefix": @json(dbTablePrefix()),
+            "folder_prefix": @json(baseFolderName()),
+        };
         @foreach (Alert::getMessages() as $type => $messages)
             @foreach ($messages as $message)
                 toastr["{{ $type }}"]("{{ $message }}");
