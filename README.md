@@ -33,3 +33,5 @@ Aplikace využívá PHP framework [Laravel](https://laravel.com/docs/8.x/), [Boo
 - `HTTPS_ENABLE` - pokud je HTTPS povoleno, je automaticky každý request na HTTP přesměrován na HTTPS s kódem 301
     - Volitelně lze zapnout také HSTS, více na [kutac.cz/pocitace-a-internety/https-nestaci-jak-na-hsts-a-hpkp](https://www.kutac.cz/pocitace-a-internety/https-nestaci-jak-na-hsts-a-hpkp)
 - `DB_*` - přístupové údaje k DB
+
+THis is the test
