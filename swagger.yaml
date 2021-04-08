@@ -22,6 +22,7 @@ securityDefinitions:
     in: header
     description: >
       Add `Authorization` header with value `Bearer {{token}}`.
+      **Example value:** `Bearer ATlf4s6d18ds43sadrt48vc3s34`
 tags:
   - name: Categories collection
   - name: Orders collection
