@@ -612,27 +612,27 @@ definitions:
         description: Email of the contact
       start_date_1:
         type: string
-        example: "2021-02-23"
+        format: date
         description: Beginning of 1. prefered term in YYYY-mm-dd format
       end_date_1:
         type: string
-        example: "2021-02-24"
+        format: date
         description: End of 1. prefered term in YYYY-mm-dd format
       start_date_2:
         type: string
-        example: "2021-02-23"
+        format: date
         description: Beginning of 2. prefered term in YYYY-mm-dd format
       end_date_2:
         type: string
-        example: "2021-02-24"
+        format: date
         description: End of 2. prefered term in YYYY-mm-dd format
       start_date_3:
         type: string
-        example: "2021-02-23"
+        format: date
         description: Beginning of 3. prefered term in YYYY-mm-dd format
       end_date_3:
         type: string
-        example: "2021-02-24"
+        format: date
         description: End of 3. prefered term in YYYY-mm-dd format
       students:
         type: number
@@ -829,13 +829,14 @@ definitions:
         minimum: 1
       start:
         type: string
-        format: date-time
+        format: date
       end:
         type: string
-        format: date-time
+        format: date
       opening:
         type: string
-        format: date-time
+        example: null
+        description: "Must be in format like '2021-01-30T12:34:56+02:00', Z as timezone cannot be used"
       price:
         type: number
         minimum: 1
