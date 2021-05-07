@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light navbar-expand-md top-menu">
-    <a href="{{ route('home') }}" class="navbar-brand align-self-start">
+    <a id="logo" href="{{ route('home') }}" class="navbar-brand align-self-start">
         <img class="logo" src="{{ asset('img/logo.png') }}" alt="@lang('app.menu.home')">
     </a>
 
@@ -49,7 +49,7 @@
         <!-- Right Side Of Navbar -->
         <div class="nav navbar-nav navbar-right ml-auto">
             @if (Auth::guest())
-                <a class="nav-item nav-link {{ Route::is('login') ? 'active' : null }}" href="{{ route('login') }}">
+                <a id="login" class="nav-item nav-link {{ Route::is('login') ? 'active' : null }}" href="{{ route('login') }}">
                     <i class="fa fa-user mr-2"></i>@lang('app.menu.login')
                 </a>
             @else

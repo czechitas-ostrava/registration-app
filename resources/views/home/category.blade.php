@@ -5,7 +5,7 @@
 @inject('categoryService', 'CzechitasApp\Services\Models\CategoryService')
 
 @section('content')
-    <div class="row justify-content-center">
+    <div id="category-content" class="row justify-content-center">
         <div class="card col-12 col-lg-9">
             @if (!empty($category->content))
                 <div class="card-body">
