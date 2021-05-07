@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <a href="{{ route('home.category', [$category]) }}" class="btn btn-sm align-self-center btn-primary">@lang('app.homepage.more_info')</a>
+                        <a href="{{ route('home.category', [$category]) }}" class="btn btn-sm align-self-center btn-primary more-info">@lang('app.homepage.more_info')</a>
                     </div>
                 </div>
             </div>
